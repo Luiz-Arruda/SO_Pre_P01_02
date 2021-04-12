@@ -8,6 +8,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		int permissao = 1;
+		boolean cont = false;
 		Semaphore semaforo = new Semaphore(permissao);
 		int [][] processo = new int [20][2];
 		 
@@ -15,9 +16,12 @@ public class Main {
 			int tempo = (int) (Math.random() * 116 + 4);
 			processo[IdThread][0] = IdThread;
 			processo[IdThread][1] = tempo;
-//			System.out.println("geracao = tread " + processo[IdThread][0] + " tempo " + processo[IdThread][1]);
-			Thread IDT = new CalculoSJF(processo,semaforo);
+			if (IdThread == 19) {
+				cont = true;
+				}
+			Thread IDT = new CalculoSJF(processo,cont, semaforo);
 			IDT.start();
+			
 		} // fim for
 	}  // fim main
 	
